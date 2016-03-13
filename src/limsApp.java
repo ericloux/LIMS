@@ -28,7 +28,6 @@ public class limsApp {
 	ArrayList<Object[]> dataList;
 	Object dataArray[][];
 	JTable jtbStatusTable;
-	TableModel tableModel;
 	String[] headings = {"SKU", "Name", "Quantity"};
 	
 	limsApp() {
@@ -118,8 +117,7 @@ public class limsApp {
 		JPanel jpnStatus = new JPanel();
 		
 			// The status panel has a scrollable table showing ware info
-		TableModel tableModel = new DefaultTableModel(dataArray,headings);
-		jtbStatusTable = new JTable(tableModel);
+		jtbStatusTable = new JTable(dataArray,headings);
 		JScrollPane jspStatusTablePane = new JScrollPane(jtbStatusTable,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -425,10 +423,12 @@ public class limsApp {
 				}
 			}
 		});
-		
 	}
 	
 	private void updateDataArray() {
+		
+		dataArray = new Object[dataList.size()][3];
+		
 			// Convert dataList to dataArray
 		for (int i = 0; i < dataList.size(); i++) {
 			Object[] dataElement = dataList.get(i);
